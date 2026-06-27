@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scriptly — Write Viral TikTok Scripts in Seconds</title>
+<meta name="description" content="Scriptly generates viral TikTok, Instagram Reels, and YouTube Shorts scripts in seconds. Pick a hook style, enter your niche, and get 3 complete scripts with hooks, outlines, CTAs, and hashtags.">
+<link rel="canonical" href="https://smuffinz99-prog.github.io/scriptly/">
+<meta property="og:title" content="Scriptly — Write Viral TikTok Scripts in Seconds">
+<meta property="og:description" content="Stop staring at a blank screen. Generate viral short-form scripts for TikTok, Reels & Shorts with proven hook formulas.">
+<meta property="og:url" content="https://smuffinz99-prog.github.io/scriptly/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is Scriptly?","acceptedAnswer":{"@type":"Answer","text":"Scriptly is a viral script generator for TikTok, Instagram Reels, and YouTube Shorts. Enter your niche and topic, pick a hook style, and get 3 complete scripts — including the hook, script outline, call to action, and hashtags — in seconds."}},
+{"@type":"Question","name":"How does Scriptly help me go viral?","acceptedAnswer":{"@type":"Answer","text":"Scriptly uses 8 proven hook formulas used by the biggest creators — Curiosity Gap, Hot Take, Personal Story, Tutorial, Shocking Statistic, Warning, Relatable POV, and Power List. Each script is structured around the exact patterns that stop scrollers and drive watch time."}},
+{"@type":"Question","name":"Is Scriptly free?","acceptedAnswer":{"@type":"Answer","text":"Yes. You get 3 free script generations per day with no account needed. Pro ($9/month) unlocks unlimited scripts, a saved library, bulk generation, and all hook styles."}},
+{"@type":"Question","name":"What platforms does Scriptly support?","acceptedAnswer":{"@type":"Answer","text":"Scriptly generates scripts optimised for TikTok, Instagram Reels, and YouTube Shorts — including platform-specific CTAs and hashtags for each."}}
+]}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#080c12;--surface:#0f1623;--surface2:#1a2232;--border:#243044;
+  --text:#f1f5f9;--muted:#64748b;--muted2:#94a3b8;
+  --accent:#0ea5e9;--accent2:#06b6d4;
+  --green:#10b981;--yellow:#f59e0b;--radius:12px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font:16px/1.65 system-ui,-apple-system,sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+/* Announce */
+.announce{background:linear-gradient(135deg,var(--accent),var(--accent2));text-align:center;padding:10px 20px;font-size:13px;font-weight:700;letter-spacing:.01em}
+.announce a{text-decoration:underline;opacity:.9}
+
+/* Nav */
+nav{position:sticky;top:0;z-index:50;background:rgba(8,12,18,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:62px;gap:20px}
+.logo{font-size:22px;font-weight:900;letter-spacing:-.5px}.logo span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-links{display:flex;gap:28px;font-size:14px;color:var(--muted2)}
+.nav-links a:hover{color:var(--text);transition:color .15s}
+.nav-right{display:flex;gap:12px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 24px;border-radius:var(--radius);font-size:14px;font-weight:700;cursor:pointer;border:none;transition:all .15s}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--text)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
+.btn-primary:hover{opacity:.9;transform:translateY(-1px)}
+.btn-lg{padding:16px 40px;font-size:17px;font-weight:800;border-radius:14px}
+
+/* Hero */
+.hero{padding:100px 40px 80px;text-align:center;max-width:900px;margin:0 auto}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 18px;background:rgba(14,165,233,.1);border:1px solid rgba(14,165,233,.25);border-radius:100px;font-size:13px;font-weight:700;color:var(--accent);margin-bottom:32px}
+.hero h1{font-size:clamp(36px,6vw,70px);font-weight:900;line-height:1.06;margin-bottom:24px;letter-spacing:-2px}
+.hero h1 .grad{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:20px;color:var(--muted2);max-width:600px;margin:0 auto 44px;line-height:1.6}
+.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}
+.trust-line{font-size:13px;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+.trust-dot{opacity:.3}
+
+/* Demo preview */
+.demo-wrap{max-width:780px;margin:0 auto 80px;padding:0 40px}
+.demo-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;border-top:3px solid var(--accent)}
+.demo-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--border);background:var(--surface2)}
+.demo-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:100px;font-size:12px;font-weight:700;background:rgba(14,165,233,.15);color:var(--accent)}
+.demo-score{font-size:13px;font-weight:800;color:var(--green)}
+.demo-body{padding:20px}
+.demo-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:8px}
+.demo-hook{font-size:20px;font-weight:700;font-style:italic;color:var(--text);margin-bottom:20px;line-height:1.4}
+.demo-points{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.demo-point{display:flex;gap:10px;font-size:14px;color:var(--muted2)}
+.demo-num{min-width:22px;height:22px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:var(--muted);flex-shrink:0;margin-top:1px}
+.demo-cta-box{background:rgba(14,165,233,.06);border:1px solid rgba(14,165,233,.15);border-radius:8px;padding:10px 14px;font-size:14px;font-weight:700;color:var(--accent);margin-bottom:14px}
+.demo-tags{font-size:12px;color:var(--muted);line-height:1.7}
+
+/* How it works */
+.section{padding:80px 40px;max-width:1100px;margin:0 auto}
+.section-kicker{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);margin-bottom:14px;text-align:center}
+.section-title{font-size:clamp(28px,4vw,44px);font-weight:900;text-align:center;margin-bottom:14px;letter-spacing:-1px}
+.section-sub{font-size:18px;color:var(--muted2);text-align:center;margin-bottom:56px;max-width:560px;margin-left:auto;margin-right:auto}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.step{text-align:center;padding:32px 24px;background:var(--surface);border:1px solid var(--border);border-radius:16px}
+.step-num{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#fff;margin:0 auto 20px}
+.step h3{font-size:18px;font-weight:800;margin-bottom:10px}
+.step p{font-size:14px;color:var(--muted2);line-height:1.6}
+
+/* Hook styles section */
+.hook-grid-land{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.hook-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;transition:border-color .2s}
+.hook-card:hover{border-color:var(--accent)}
+.hook-icon{font-size:28px;margin-bottom:12px}
+.hook-card h4{font-size:15px;font-weight:800;margin-bottom:6px}
+.hook-card p{font-size:13px;color:var(--muted2);line-height:1.5}
+
+/* Features */
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feature{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px}
+.feat-icon{font-size:24px;margin-bottom:14px}
+.feature h4{font-size:16px;font-weight:800;margin-bottom:8px}
+.feature p{font-size:14px;color:var(--muted2);line-height:1.6}
+
+/* Pricing */
+.pricing-wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:760px;margin:0 auto}
+.plan{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:32px;position:relative}
+.plan.pro{border-color:var(--accent);background:linear-gradient(135deg,rgba(14,165,233,.05),rgba(6,182,212,.05))}
+.plan-badge{position:absolute;top:-1px;right:24px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-size:11px;font-weight:800;padding:4px 14px;border-radius:0 0 10px 10px;letter-spacing:.04em}
+.plan-name{font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:14px}
+.plan-price{font-size:42px;font-weight:900;letter-spacing:-1px;margin-bottom:6px}
+.plan-price sup{font-size:22px;font-weight:700;vertical-align:top;margin-top:10px}
+.plan-price span{font-size:16px;font-weight:400;color:var(--muted)}
+.plan-desc{font-size:14px;color:var(--muted2);margin-bottom:24px}
+.plan-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.plan-features li{display:flex;align-items:center;gap:10px;font-size:14px}
+.plan-features li .check{color:var(--green);font-weight:800;flex-shrink:0}
+.plan-features li .cross{color:var(--muted);flex-shrink:0}
+.plan-cta{display:block;width:100%;padding:14px;border-radius:10px;border:none;font-size:15px;font-weight:800;cursor:pointer;text-align:center;transition:all .15s}
+.plan-cta.free{background:var(--surface2);color:var(--text);border:1px solid var(--border)}
+.plan-cta.free:hover{border-color:var(--accent)}
+.plan-cta.pro-cta{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
+.plan-cta.pro-cta:hover{opacity:.9;transform:translateY(-1px)}
+
+/* FAQ */
+.faq{max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+.faq-item{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.faq-q{padding:18px 20px;font-size:15px;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;user-select:none}
+.faq-q::after{content:"+";font-size:20px;color:var(--muted);flex-shrink:0;transition:transform .2s}
+.faq-item.open .faq-q::after{transform:rotate(45deg)}
+.faq-a{display:none;padding:0 20px 18px;font-size:14px;color:var(--muted2);line-height:1.7}
+.faq-item.open .faq-a{display:block}
+
+/* CTA band */
+.cta-band{background:linear-gradient(135deg,rgba(14,165,233,.1),rgba(6,182,212,.06));border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 40px;text-align:center}
+.cta-band h2{font-size:clamp(28px,4vw,48px);font-weight:900;margin-bottom:16px;letter-spacing:-1px}
+.cta-band p{font-size:18px;color:var(--muted2);margin-bottom:36px}
+
+/* Footer */
+footer{padding:40px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.footer-logo{font-size:18px;font-weight:900}.footer-logo span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+footer nav{display:flex;gap:24px;font-size:13px;color:var(--muted)}
+footer nav a:hover{color:var(--text)}
+.footer-copy{font-size:12px;color:var(--muted)}
+
+@media(max-width:900px){
+  nav{padding:0 20px}.hero{padding:70px 20px 60px}
+  .steps{grid-template-columns:1fr}.hook-grid-land{grid-template-columns:1fr 1fr}
+  .features-grid{grid-template-columns:1fr 1fr}.pricing-wrap{grid-template-columns:1fr}
+  .section{padding:60px 20px}.demo-wrap{padding:0 20px}
+}
+@media(max-width:600px){
+  .nav-links{display:none}.hook-grid-land{grid-template-columns:1fr}
+  .features-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="announce">&#127381; Free TikTok script generator — no account needed &nbsp;&#183;&nbsp; <a href="app.html">Try it free →</a></div>
+
+<nav>
+  <div class="logo">Script<span>ly</span></div>
+  <div class="nav-links">
+    <a href="#how-it-works">How It Works</a>
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <div class="nav-right">
+    <a href="app.html" class="btn btn-outline">Open App</a>
+    <a href="app.html" class="btn btn-primary">Try Free &#8594;</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-badge">&#127381; Works for TikTok · Reels · YouTube Shorts</div>
+  <h1>Write <span class="grad">Viral Scripts</span><br>in Seconds</h1>
+  <p class="hero-sub">Stop staring at a blank screen. Generate complete short-form scripts with proven viral hooks, outlines, CTAs, and hashtags — instantly.</p>
+  <div class="hero-ctas">
+    <a href="app.html" class="btn btn-primary btn-lg">&#9889; Generate Free Scripts</a>
+    <a href="#how-it-works" class="btn btn-outline btn-lg">See How It Works</a>
+  </div>
+  <p class="trust-line">
+    <span>✓ No account needed</span>
+    <span class="trust-dot">·</span>
+    <span>✓ 3 free scripts daily</span>
+    <span class="trust-dot">·</span>
+    <span>✓ Works on any niche</span>
+    <span class="trust-dot">·</span>
+    <span>✓ 8 proven hook formulas</span>
+  </p>
+</section>
+
+<!-- Demo card -->
+<div class="demo-wrap">
+  <div class="demo-card">
+    <div class="demo-header">
+      <span class="demo-badge">🤔 Curiosity Gap</span>
+      <span class="demo-score">⚡ 91/100 Viral Score</span>
+    </div>
+    <div class="demo-body">
+      <div class="demo-label">HOOK (first 3 seconds)</div>
+      <div class="demo-hook">"I discovered a personal finance secret that nobody talks about..."</div>
+      <div class="demo-label">SCRIPT OUTLINE</div>
+      <div class="demo-points">
+        <div class="demo-point"><span class="demo-num">1</span><span>Tease the mystery — hint at what you found without revealing it yet</span></div>
+        <div class="demo-point"><span class="demo-num">2</span><span>Build tension — explain why this matters specifically to beginners</span></div>
+        <div class="demo-point"><span class="demo-num">3</span><span>The reveal — share your actual insight, be specific and concrete</span></div>
+        <div class="demo-point"><span class="demo-num">4</span><span>Make it actionable — one thing they can do TODAY</span></div>
+      </div>
+      <div class="demo-label">CALL TO ACTION</div>
+      <div class="demo-cta-box">Follow for more personal finance tips</div>
+      <div class="demo-label">HASHTAGS</div>
+      <div class="demo-tags">#fyp #foryoupage #foryou #viral #trending #personalfinance #moneytips #financialfreedom #savingmoney #investing #budgeting</div>
+    </div>
+  </div>
+</div>
+
+<!-- How it works -->
+<section class="section" id="how-it-works">
+  <div class="section-kicker">How It Works</div>
+  <h2 class="section-title">From blank page to viral script in 30 seconds</h2>
+  <p class="section-sub">Three inputs. One click. Three complete scripts ready to film.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Enter Your Niche & Topic</h3>
+      <p>Tell Scriptly what your channel is about and what this specific video is on. Be as specific as you like — the more detail, the better the output.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>Pick a Hook Style</h3>
+      <p>Choose from 8 proven viral hook formulas — Curiosity Gap, Hot Take, Personal Story, Tutorial, and more. Or let Scriptly mix it up for you.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Get 3 Complete Scripts</h3>
+      <p>Instantly receive 3 scripts, each with a hook, script outline, call to action, and optimised hashtags. Copy and film — it's that simple.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Hook styles -->
+<section class="section" style="padding-top:0">
+  <div class="section-kicker">8 Hook Formulas</div>
+  <h2 class="section-title">Every proven hook style, built in</h2>
+  <p class="section-sub">Used by the biggest creators. Now available to everyone.</p>
+  <div class="hook-grid-land">
+    <div class="hook-card"><div class="hook-icon">🤔</div><h4>Curiosity Gap</h4><p>Make them need to know what comes next. The scroll-stopper that keeps viewers watching to the end.</p></div>
+    <div class="hook-card"><div class="hook-icon">🔥</div><h4>Hot Take</h4><p>A bold, polarising opinion that floods your comments and signals the algorithm to push your video.</p></div>
+    <div class="hook-card"><div class="hook-icon">📖</div><h4>Personal Story</h4><p>Authentic journey content that builds trust, connection, and a loyal following over time.</p></div>
+    <div class="hook-card"><div class="hook-icon">✅</div><h4>Tutorial</h4><p>Step-by-step value that positions you as an expert and drives saves — the metric that matters most.</p></div>
+    <div class="hook-card"><div class="hook-icon">📊</div><h4>Shocking Statistic</h4><p>A data point that stops the scroll cold and makes your audience instantly share your video.</p></div>
+    <div class="hook-card"><div class="hook-icon">⚠️</div><h4>Warning / Alert</h4><p>Protect your audience from a costly mistake. Fear-of-missing-out that commands immediate attention.</p></div>
+    <div class="hook-card"><div class="hook-icon">😩</div><h4>Relatable POV</h4><p>Make your audience feel completely seen. The format that earns the most duets and shares.</p></div>
+    <div class="hook-card"><div class="hook-icon">📋</div><h4>Power List</h4><p>Promise X things and deliver all of them. Drives saves and gives you easy repeat content.</p></div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="section" id="features" style="padding-top:0">
+  <div class="section-kicker">Features</div>
+  <h2 class="section-title">Everything a creator needs</h2>
+  <p class="section-sub">Built for TikTok, Reels, and Shorts creators who want to post consistently without burning out.</p>
+  <div class="features-grid">
+    <div class="feature"><div class="feat-icon">⚡</div><h4>Instant Generation</h4><p>3 complete scripts in under 2 seconds. No waiting, no loading, no API keys.</p></div>
+    <div class="feature"><div class="feat-icon">🎯</div><h4>Niche-Aware Scripts</h4><p>Hashtags and language tailored to your specific niche — not generic filler.</p></div>
+    <div class="feature"><div class="feat-icon">📱</div><h4>All 3 Platforms</h4><p>Platform-specific CTAs and hashtag sets for TikTok, Instagram Reels, and YouTube Shorts.</p></div>
+    <div class="feature"><div class="feat-icon">⚡</div><h4>Viral Score</h4><p>Each script gets a Viral Score based on the hook formula and structure so you know which to film first.</p></div>
+    <div class="feature"><div class="feat-icon">💾</div><h4>Script Library (Pro)</h4><p>Save your best scripts and build a content bank you can draw on whenever inspiration runs dry.</p></div>
+    <div class="feature"><div class="feat-icon">📋</div><h4>One-Click Copy</h4><p>Perfectly formatted for pasting into notes, notion, or straight into your caption box.</p></div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="section" id="pricing">
+  <div class="section-kicker">Pricing</div>
+  <h2 class="section-title">Simple, fair pricing</h2>
+  <p class="section-sub">Start free. Upgrade when you're posting every day.</p>
+  <div class="pricing-wrap">
+    <div class="plan">
+      <div class="plan-name">Free</div>
+      <div class="plan-price"><sup>$</sup>0<span></span></div>
+      <div class="plan-desc">Perfect for getting started.</div>
+      <ul class="plan-features">
+        <li><span class="check">✓</span> 3 script generations per day</li>
+        <li><span class="check">✓</span> All 8 hook styles</li>
+        <li><span class="check">✓</span> TikTok, Reels & Shorts</li>
+        <li><span class="check">✓</span> Hook + outline + CTA + hashtags</li>
+        <li><span class="cross">—</span> <span style="color:var(--muted)">Saved script library</span></li>
+        <li><span class="cross">—</span> <span style="color:var(--muted)">Unlimited generations</span></li>
+      </ul>
+      <a href="app.html" class="plan-cta free">Start for Free</a>
+    </div>
+    <div class="plan pro">
+      <div class="plan-badge">MOST POPULAR</div>
+      <div class="plan-name">Pro</div>
+      <div class="plan-price"><sup>$</sup>9<span>/month</span></div>
+      <div class="plan-desc">For creators posting every day.</div>
+      <ul class="plan-features">
+        <li><span class="check">✓</span> <strong>Unlimited</strong> script generations</li>
+        <li><span class="check">✓</span> All 8 hook styles</li>
+        <li><span class="check">✓</span> TikTok, Reels & Shorts</li>
+        <li><span class="check">✓</span> Hook + outline + CTA + hashtags</li>
+        <li><span class="check">✓</span> <strong>Saved script library</strong></li>
+        <li><span class="check">✓</span> Cancel any time</li>
+      </ul>
+      <a href="app.html" class="plan-cta pro-cta" onclick="event.preventDefault();window.location.href='app.html'">&#9889; Start Pro — $9/mo</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="section-kicker">FAQ</div>
+  <h2 class="section-title">Common questions</h2>
+  <div class="faq">
+    <div class="faq-item open">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What is Scriptly?</div>
+      <div class="faq-a">Scriptly is a viral script generator for TikTok, Instagram Reels, and YouTube Shorts. You enter your niche and topic, pick a hook style, and get 3 complete scripts — including the opening hook, script outline, call to action, and hashtags — in seconds.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Do I need an account to use Scriptly?</div>
+      <div class="faq-a">No. You can generate 3 scripts per day completely free with no signup. Pro users get unlimited generations and a saved library.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How does the Viral Score work?</div>
+      <div class="faq-a">Every script is scored based on the hook formula and structure. Hooks with higher inherent viral potential (like Curiosity Gap and Hot Take) score higher. Use it as a guide for which script to film first.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What niches does Scriptly work for?</div>
+      <div class="faq-a">Any niche. Finance, fitness, cooking, beauty, business, gaming, travel, pets — Scriptly adapts the hook and hashtags to your specific topic. The more specific your input, the better the output.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Can I cancel Pro at any time?</div>
+      <div class="faq-a">Yes. Cancel any time from your Stripe billing portal. No contracts, no questions asked. You'll keep Pro access until the end of your billing period.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA band -->
+<div class="cta-band">
+  <h2>Start writing viral scripts today</h2>
+  <p>Free. No account needed. Ready in 30 seconds.</p>
+  <a href="app.html" class="btn btn-primary btn-lg">&#9889; Generate Free Scripts</a>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo">Script<span>ly</span></div>
+  <nav>
+    <a href="app.html">App</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="tiktok-script-generator.html">TikTok Scripts</a>
+    <a href="viral-hook-generator.html">Viral Hooks</a>
+  </nav>
+  <div class="footer-copy">© 2026 Scriptly. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
