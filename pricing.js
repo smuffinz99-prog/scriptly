@@ -1,5 +1,5 @@
 /* Scriptly — Stripe Checkout
- * Pro plan: $9/month
+ * Pro plan: $6/month
  * Replace the URL below with your Stripe Payment Link.
  * Create at: dashboard.stripe.com → Payment Links → + New
  * Set post-payment redirect to: https://smuffinz99-prog.github.io/scriptly/app.html?pro=success
