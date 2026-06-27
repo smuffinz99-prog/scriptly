@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Scriptly — TikTok & Reels Script Generator</title>
+<title>Scriptly — Full Script Generator for TikTok, Reels, Shorts & YouTube</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -18,125 +18,181 @@ a{color:var(--accent);text-decoration:none}
 button{font-family:inherit;cursor:pointer}
 
 /* Topbar */
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:52px;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:40;gap:12px;flex-shrink:0}
-.logo{font-size:20px;font-weight:900;white-space:nowrap;letter-spacing:-0.5px}.logo span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.topbar-center{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:52px;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:40;gap:10px;flex-shrink:0}
+.logo{font-size:19px;font-weight:900;white-space:nowrap;letter-spacing:-0.5px}.logo span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.topbar-center{display:flex;gap:5px;overflow-x:auto;scrollbar-width:none}
 .topbar-center::-webkit-scrollbar{display:none}
-.plat-btn{padding:5px 14px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--muted2);font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;white-space:nowrap}
+.plat-btn{padding:5px 12px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--muted2);font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;white-space:nowrap}
 .plat-btn.active{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;color:#fff}
-.topbar-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.topbar-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
 .pro-badge{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-size:11px;font-weight:800;padding:3px 10px;border-radius:100px;letter-spacing:.03em}
-.btn{padding:7px 16px;border-radius:var(--radius);border:none;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all .15s;white-space:nowrap}
+.btn{padding:7px 14px;border-radius:var(--radius);border:none;font-size:12px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:all .15s;white-space:nowrap}
 .btn:hover{opacity:.85}
 .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
-.btn-ghost{background:transparent;color:var(--muted2);border:1px solid var(--border)}
+.btn-ghost{background:transparent;color:var(--muted2);border:1px solid var(--border);font-size:12px}
 .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
-.btn-upgrade{background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff;font-size:12px;padding:6px 14px}
+.btn-upgrade{background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff;font-size:12px;padding:6px 13px}
+.btn-xs{padding:4px 10px;font-size:11px;border-radius:6px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;cursor:pointer;font-family:inherit;font-weight:700}
 
 /* Layout */
 .shell{display:flex;height:calc(100vh - 52px);overflow:hidden}
-.sidebar{width:340px;flex-shrink:0;overflow-y:auto;border-right:1px solid var(--border);padding:18px;display:flex;flex-direction:column;gap:14px}
+.sidebar{width:310px;flex-shrink:0;overflow-y:auto;border-right:1px solid var(--border);padding:16px;display:flex;flex-direction:column;gap:13px}
 .sidebar::-webkit-scrollbar{width:4px}.sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
-.content{flex:1;overflow-y:auto;display:flex;flex-direction:column}
-.content::-webkit-scrollbar{width:6px}.content::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+.main{flex:1;overflow-y:auto;display:flex;flex-direction:column}
+.main::-webkit-scrollbar{width:6px}.main::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
 
 /* Tabs */
-.tabs{display:flex;border-bottom:1px solid var(--border);padding:0 20px;background:var(--surface);flex-shrink:0}
-.tab-btn{padding:12px 18px;background:transparent;border:none;color:var(--muted);font-size:13px;font-weight:700;cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;margin-bottom:-1px}
+.tabs{display:flex;border-bottom:1px solid var(--border);padding:0 16px;background:var(--surface);flex-shrink:0}
+.tab-btn{padding:12px 16px;background:transparent;border:none;color:var(--muted);font-size:13px;font-weight:700;cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;margin-bottom:-1px}
 .tab-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
 .tab-pane{display:none;padding:20px;flex:1}
 .tab-pane.active{display:block}
 
 /* Sidebar fields */
 .section-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:6px}
-.field{display:flex;flex-direction:column;gap:5px}
+.field{display:flex;flex-direction:column;gap:4px}
 .field label{font-size:12px;font-weight:600;color:var(--muted2)}
-.field input,.field select{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:9px 11px;color:var(--text);font-size:13px;font-family:inherit;transition:border-color .15s;width:100%}
-.field input:focus,.field select:focus{outline:none;border-color:var(--accent)}
-.field input::placeholder{color:var(--muted)}
+.field input,.field select,.field textarea{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 10px;color:var(--text);font-size:13px;font-family:inherit;transition:border-color .15s;width:100%}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent)}
+.field input::placeholder,.field textarea::placeholder{color:var(--muted)}
 .field select option{background:var(--surface2)}
+.field textarea{resize:vertical;line-height:1.5}
+
+/* Duration grid */
+.dur-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:4px}
+.dur-btn{padding:7px 4px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--muted2);font-size:11px;font-weight:700;cursor:pointer;text-align:center;transition:all .15s;line-height:1.2}
+.dur-btn:hover{border-color:var(--accent);color:var(--accent)}
+.dur-btn.active{border-color:var(--accent);background:rgba(14,165,233,.1);color:var(--accent)}
+.dur-btn.pro-dur{position:relative}
+.dur-btn.pro-dur::after{content:'⭐';font-size:9px;display:block;color:var(--yellow)}
+.dur-btn.locked-dur{opacity:.45;cursor:default}
 
 /* Hook style grid */
-.hook-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:4px}
-.hook-opt{padding:8px 10px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--muted2);font-size:11px;font-weight:700;cursor:pointer;text-align:left;transition:all .15s;display:flex;align-items:center;gap:6px;line-height:1.3}
+.hook-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:4px}
+.hook-opt{padding:7px 8px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--muted2);font-size:11px;font-weight:700;cursor:pointer;text-align:left;transition:all .15s;display:flex;align-items:center;gap:5px;line-height:1.3}
 .hook-opt:hover{border-color:var(--accent);color:var(--accent)}
 .hook-opt.active{border-color:var(--accent);background:rgba(14,165,233,.1);color:var(--accent)}
-.hook-opt .hook-emoji{font-size:15px;flex-shrink:0}
+.hook-opt .hook-emoji{font-size:14px;flex-shrink:0}
 .hook-opt.random-opt{grid-column:span 2;justify-content:center;background:linear-gradient(135deg,rgba(14,165,233,.08),rgba(6,182,212,.08));border-style:dashed}
 
 /* Generate button */
-.generate-wrap{margin-top:4px}
-.generate-btn{width:100%;padding:13px;border-radius:var(--radius);border:none;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-size:15px;font-weight:800;cursor:pointer;transition:all .15s;letter-spacing:.01em}
+.generate-wrap{margin-top:2px}
+.generate-btn{width:100%;padding:12px;border-radius:var(--radius);border:none;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-size:15px;font-weight:800;cursor:pointer;transition:all .15s}
 .generate-btn:hover{opacity:.9;transform:translateY(-1px)}
 .usage-counter{text-align:center;font-size:11px;color:var(--muted);margin-top:6px}
 .usage-counter.pro{color:var(--accent)}
 .usage-counter.empty{color:var(--red)}
 
-/* Result cards */
-.results-grid{display:flex;flex-direction:column;gap:16px}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color .2s}
-.card:hover{border-color:var(--border)}
-.card-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border)}
-.hook-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:100px;font-size:12px;font-weight:700}
-.score{font-size:13px;font-weight:800;display:flex;align-items:center;gap:4px}
-.script-section{padding:12px 16px;border-bottom:1px solid var(--border)}
-.script-section:last-of-type{border-bottom:none}
-.sec-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:6px}
-.sec-sub{font-weight:400;text-transform:none;letter-spacing:0;opacity:.7}
-.hook-line{font-size:18px;font-weight:700;line-height:1.4;color:var(--text);font-style:italic}
-.body-list{list-style:none;display:flex;flex-direction:column;gap:8px}
-.body-list li{display:flex;gap:10px;font-size:13px;color:var(--muted2);align-items:flex-start}
-.bnum{min-width:20px;height:20px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:var(--muted);flex-shrink:0;margin-top:1px}
-.cta-line{font-size:13px;font-weight:700;color:var(--accent);padding:8px 12px;background:rgba(14,165,233,.06);border-radius:8px;border:1px solid rgba(14,165,233,.15)}
-.hashtags{font-size:12px;color:var(--muted2);line-height:1.7;word-break:break-word}
-.card-actions{padding:10px 16px;display:flex;gap:8px;background:var(--surface2);border-top:1px solid var(--border)}
+/* Script cards */
+.results-grid{display:flex;flex-direction:column;gap:18px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.card-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--border)}
+.card-meta{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.hook-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:100px;font-size:11px;font-weight:700}
+.dur-badge,.plat-badge{display:inline-flex;align-items:center;padding:3px 8px;border-radius:100px;font-size:10px;font-weight:700;background:var(--surface2);border:1px solid var(--border);color:var(--muted2)}
+.score{font-size:13px;font-weight:800}
+.alg-note{font-size:11px;color:var(--muted);padding:7px 14px;background:rgba(14,165,233,.04);border-bottom:1px solid var(--border)}
+
+/* Script sections */
+.script-sec{padding:12px 14px;border-bottom:1px solid var(--border)}
+.sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}
+.sec-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.sec-time{font-size:10px;color:var(--muted);font-variant-numeric:tabular-nums;background:var(--surface2);padding:1px 6px;border-radius:4px}
+.visual-note{font-size:11px;color:var(--accent);opacity:.8;margin-bottom:6px;font-style:italic}
+.sec-note{font-size:11px;color:var(--muted);margin-bottom:6px}
+.sec-text{font-size:14px;color:var(--text);line-height:1.7;white-space:pre-wrap;font-style:italic}
+
+/* Extras */
+.extras{padding:12px 14px;border-bottom:1px solid var(--border);display:flex;flex-direction:column;gap:10px}
+.extra-item{}
+.extra-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}
+.extra-text{font-size:13px;color:var(--muted2);line-height:1.6}
+.hashtags{font-size:12px;color:var(--muted2);line-height:1.8;word-break:break-word}
+.code-block{font-family:monospace;font-size:12px;white-space:pre-wrap;background:var(--surface2);padding:10px;border-radius:6px;border:1px solid var(--border)}
+
+/* Analysis block */
+.analysis-block{padding:12px 14px;border-bottom:1px solid var(--border)}
+.analysis-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.pro-only-tag{background:rgba(245,158,11,.15);color:var(--yellow);font-size:10px;padding:2px 7px;border-radius:100px;font-weight:700;text-transform:none;letter-spacing:0}
+.score-row{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.score-label{font-size:12px;color:var(--muted2);min-width:110px;flex-shrink:0}
+.score-bar-wrap{flex:1;height:5px;background:var(--border);border-radius:3px;overflow:hidden}
+.score-bar-fill{height:100%;border-radius:3px;transition:width .4s}
+.score-num{font-size:12px;font-weight:800;min-width:28px;text-align:right}
+.locked-row{opacity:.5}
+.locked-score{font-size:11px;color:var(--muted);font-weight:700;background:var(--surface2);padding:2px 8px;border-radius:5px;border:1px solid var(--border)}
+.suggestions{margin-top:10px;display:flex;flex-direction:column;gap:6px}
+.suggestion{display:flex;align-items:flex-start;gap:8px;padding:8px 10px;border-radius:8px;font-size:12px;line-height:1.5}
+.suggestion.open{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.15)}
+.suggestion.locked{background:var(--surface2);border:1px solid var(--border);opacity:.7}
+.sug-icon{flex-shrink:0;font-size:14px;margin-top:1px}
+.sug-lock{flex-shrink:0;font-size:13px;margin-top:1px}
+.sug-text{color:var(--muted2)}
+.sug-locked-text{color:var(--muted);font-style:italic}
+
+/* Card actions */
+.card-actions{padding:9px 14px;display:flex;gap:8px;background:var(--surface2);border-top:1px solid var(--border)}
 
 /* Empty state */
 .empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;min-height:400px;text-align:center;gap:12px;padding:40px}
-.empty-icon{font-size:48px;opacity:.4}
-.empty-title{font-size:18px;font-weight:700;color:var(--muted2)}
-.empty-sub{font-size:14px;color:var(--muted);max-width:320px}
+.empty-icon{font-size:44px;opacity:.35}
+.empty-title{font-size:17px;font-weight:700;color:var(--muted2)}
+.empty-sub{font-size:13px;color:var(--muted);max-width:300px}
 
-/* Saved library */
+/* Analyze tab */
+.analyze-wrap{max-width:680px}
+.analyze-header{margin-bottom:16px}
+.analyze-header h2{font-size:18px;font-weight:800;margin-bottom:4px}
+.analyze-header p{font-size:13px;color:var(--muted2)}
+.analyze-opts{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.analyze-plat-btn{padding:5px 14px;border-radius:20px;border:1px solid var(--border);background:var(--surface2);color:var(--muted2);font-size:12px;font-weight:700;cursor:pointer;transition:all .15s}
+.analyze-plat-btn.active{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;color:#fff}
+.analyze-btn{width:100%;padding:11px;border-radius:var(--radius);border:none;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-size:14px;font-weight:800;cursor:pointer;margin-top:10px;transition:all .15s}
+.analyze-btn:hover{opacity:.9}
+#analysis-results{margin-top:16px}
+.grammarly-note{background:rgba(14,165,233,.06);border:1px solid rgba(14,165,233,.15);border-radius:8px;padding:12px;font-size:12px;color:var(--muted2);margin-top:12px}
+.grammarly-note strong{color:var(--text)}
+
+/* Saved */
 .saved-empty{color:var(--muted);font-size:14px;text-align:center;padding:40px}
-.saved-list{display:flex;flex-direction:column;gap:12px}
-.saved-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
-.saved-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.saved-topic{font-size:12px;color:var(--muted);font-style:italic}
-.saved-hook{font-size:14px;font-weight:600;color:var(--muted2);font-style:italic}
+.saved-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:7px}
+.saved-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.saved-hook{font-size:13px;font-weight:600;color:var(--muted2);font-style:italic}
+.btn-sm{padding:5px 11px;font-size:11px}
 
 /* Upgrade overlay */
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(4px);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
 .overlay.open{display:flex}
-.upgrade-modal{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px 36px;max-width:440px;width:100%;text-align:center}
-.upgrade-modal h2{font-size:24px;font-weight:900;margin-bottom:10px}
+.upgrade-modal{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:36px 32px;max-width:420px;width:100%;text-align:center}
+.upgrade-modal h2{font-size:22px;font-weight:900;margin-bottom:8px}
 .upgrade-modal h2 span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.upgrade-modal p{color:var(--muted2);font-size:14px;margin-bottom:24px;line-height:1.6}
-.upgrade-features{list-style:none;text-align:left;margin-bottom:28px;display:flex;flex-direction:column;gap:8px}
-.upgrade-features li{display:flex;align-items:center;gap:10px;font-size:14px}
-.upgrade-features li::before{content:"✓";color:var(--green);font-weight:800;flex-shrink:0}
-.upgrade-price{font-size:32px;font-weight:900;color:var(--text);margin-bottom:6px}
-.upgrade-price span{font-size:16px;color:var(--muted);font-weight:400}
-.upgrade-note{font-size:12px;color:var(--muted);margin-bottom:24px}
-.upgrade-cta{width:100%;padding:14px;border-radius:10px;border:none;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-size:16px;font-weight:800;cursor:pointer;margin-bottom:12px;transition:opacity .15s}
+.upgrade-modal p{color:var(--muted2);font-size:13px;margin-bottom:20px;line-height:1.6}
+.upgrade-features{list-style:none;text-align:left;margin-bottom:22px;display:flex;flex-direction:column;gap:7px}
+.upgrade-features li{display:flex;align-items:flex-start;gap:9px;font-size:13px}
+.upgrade-features li::before{content:"✓";color:var(--green);font-weight:800;flex-shrink:0;margin-top:1px}
+.upgrade-price{font-size:30px;font-weight:900;color:var(--text);margin-bottom:4px}
+.upgrade-price span{font-size:15px;color:var(--muted);font-weight:400}
+.upgrade-note{font-size:12px;color:var(--muted);margin-bottom:20px}
+.upgrade-cta{width:100%;padding:13px;border-radius:10px;border:none;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-size:15px;font-weight:800;cursor:pointer;margin-bottom:10px;transition:opacity .15s}
 .upgrade-cta:hover{opacity:.9}
 .upgrade-dismiss{background:transparent;border:none;color:var(--muted);font-size:13px;cursor:pointer;text-decoration:underline}
 
 /* Toast */
-.toast{position:fixed;bottom:24px;right:24px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px 20px;font-size:14px;font-weight:600;z-index:200;transform:translateY(80px);opacity:0;transition:all .25s}
+.toast{position:fixed;bottom:20px;right:20px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px 18px;font-size:13px;font-weight:600;z-index:200;transform:translateY(60px);opacity:0;transition:all .25s}
 .toast.show{transform:translateY(0);opacity:1}
 .toast-success{border-color:var(--green);color:var(--green)}
 .toast-warn{border-color:var(--yellow);color:var(--yellow)}
 
-/* Hidden select (driven by plat-btn clicks) */
-#sel-platform{display:none}
+/* Hidden selects */
+#sel-platform,#sel-hook,#sel-duration{display:none}
 
-@media(max-width:700px){
+@media(max-width:680px){
   .shell{flex-direction:column;height:auto;overflow:visible}
   .sidebar{width:100%;border-right:none;border-bottom:1px solid var(--border)}
-  .content{height:auto}
+  .main{height:auto}
   .hook-grid{grid-template-columns:1fr}
   .hook-opt.random-opt{grid-column:span 1}
+  .dur-grid{grid-template-columns:repeat(3,1fr)}
 }
 </style>
 </head>
@@ -148,19 +204,20 @@ button{font-family:inherit;cursor:pointer}
     <button class="plat-btn active" data-plat="tiktok" onclick="setPlatform('tiktok')">&#127381; TikTok</button>
     <button class="plat-btn" data-plat="reels" onclick="setPlatform('reels')">&#128247; Reels</button>
     <button class="plat-btn" data-plat="shorts" onclick="setPlatform('shorts')">&#9654; Shorts</button>
+    <button class="plat-btn" data-plat="youtube" onclick="setPlatform('youtube')">&#127910; YouTube</button>
   </div>
   <div class="topbar-right">
     <span class="pro-badge" id="pro-badge" style="display:none">PRO</span>
-    <button class="btn btn-upgrade" id="nav-upgrade" onclick="triggerUpgrade()">&#9889; Pro — $6/mo (beats ChatGPT)</button>
+    <button class="btn btn-upgrade" id="nav-upgrade" onclick="triggerUpgrade()">&#9889; Pro — $6/mo</button>
   </div>
 </div>
 
 <div class="shell">
-  <!-- Sidebar: inputs -->
+  <!-- Sidebar -->
   <aside class="sidebar">
     <div>
       <div class="section-label">Your Content</div>
-      <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="display:flex;flex-direction:column;gap:9px">
         <div class="field">
           <label>Your Niche</label>
           <input id="inp-niche" type="text" placeholder="e.g. personal finance, fitness, cooking…">
@@ -177,10 +234,24 @@ button{font-family:inherit;cursor:pointer}
     </div>
 
     <div>
+      <div class="section-label">Video Length</div>
+      <div class="dur-grid" id="dur-grid">
+        <button class="dur-btn" data-dur="15s" onclick="setDuration('15s')">15 sec</button>
+        <button class="dur-btn" data-dur="30s" onclick="setDuration('30s')">30 sec</button>
+        <button class="dur-btn active" data-dur="60s" onclick="setDuration('60s')">60 sec</button>
+        <button class="dur-btn pro-dur" data-dur="90s" onclick="setDuration('90s')">90 sec</button>
+        <button class="dur-btn pro-dur" data-dur="3min" onclick="setDuration('3min')">3 min</button>
+        <button class="dur-btn pro-dur" data-dur="5min" onclick="setDuration('5min')">5 min</button>
+        <button class="dur-btn pro-dur locked-dur" data-dur="10min" onclick="setDuration('10min')" style="grid-column:span 3">10 min (YouTube)</button>
+      </div>
+      <div style="font-size:10px;color:var(--muted);margin-top:6px">⭐ = Pro only &nbsp;·&nbsp; Full scripts for every length</div>
+    </div>
+
+    <div>
       <div class="section-label">Hook Style</div>
       <div class="hook-grid">
-        <button class="hook-opt active" data-hook="random" onclick="setHook('random')">
-          <span class="hook-emoji">🎲</span><span>Mix It Up<br><small style="font-weight:400;color:var(--muted)">3 different styles</small></span>
+        <button class="hook-opt random-opt active" data-hook="random" onclick="setHook('random')">
+          <span class="hook-emoji">🎲</span><span>Mix It Up</span>
         </button>
         <button class="hook-opt" data-hook="curiosity" onclick="setHook('curiosity')">
           <span class="hook-emoji">🤔</span><span>Curiosity Gap</span>
@@ -207,25 +278,57 @@ button{font-family:inherit;cursor:pointer}
           <span class="hook-emoji">📋</span><span>Power List</span>
         </button>
       </div>
-      <select id="sel-hook"><option value="random">random</option></select>
-      <select id="sel-platform" style="display:none"><option value="tiktok">tiktok</option><option value="reels">reels</option><option value="shorts">shorts</option></select>
     </div>
 
+    <!-- Hidden selects used by app.js -->
+    <select id="sel-hook"><option value="random">random</option><option value="curiosity">curiosity</option><option value="hottake">hottake</option><option value="story">story</option><option value="tutorial">tutorial</option><option value="stats">stats</option><option value="warning">warning</option><option value="pov">pov</option><option value="list">list</option></select>
+    <select id="sel-platform"><option value="tiktok">tiktok</option><option value="reels">reels</option><option value="shorts">shorts</option><option value="youtube">youtube</option></select>
+    <select id="sel-duration"><option value="15s">15s</option><option value="30s">30s</option><option value="60s" selected>60s</option><option value="90s">90s</option><option value="3min">3min</option><option value="5min">5min</option><option value="10min">10min</option></select>
+
     <div class="generate-wrap">
-      <button class="generate-btn" id="generate-btn" onclick="generateScripts()">&#9889; Generate Scripts</button>
-      <div class="usage-counter" id="usage-counter">3 free scripts remaining today</div>
+      <button class="generate-btn" onclick="generateScripts()">&#9889; Generate Full Script</button>
+      <div class="usage-counter" id="usage-counter">1 free script remaining today</div>
     </div>
   </aside>
 
-  <!-- Main content area -->
-  <div class="content">
+  <!-- Main -->
+  <div class="main">
     <div class="tabs">
-      <button class="tab-btn active" data-tab="scripts" onclick="switchTab('scripts')">Scripts</button>
-      <button class="tab-btn" data-tab="saved" onclick="switchTab('saved')">&#128190; Saved Library</button>
+      <button class="tab-btn active" data-tab="scripts" onclick="switchTab('scripts')">&#9889; Scripts</button>
+      <button class="tab-btn" data-tab="analyze" onclick="switchTab('analyze')">&#128270; Analyze My Script</button>
+      <button class="tab-btn" data-tab="saved" onclick="switchTab('saved')">&#128190; Saved</button>
     </div>
 
     <div class="tab-pane active" id="tab-scripts">
       <div class="results-grid" id="results"></div>
+    </div>
+
+    <div class="tab-pane" id="tab-analyze">
+      <div class="analyze-wrap">
+        <div class="analyze-header">
+          <h2>&#128270; Analyze My Script</h2>
+          <p>Paste your existing script and get a Grammarly-style breakdown — hook strength, retention score, CTA effectiveness, and specific improvement suggestions.</p>
+        </div>
+        <div style="margin-bottom:10px">
+          <div class="section-label" style="margin-bottom:6px">Platform</div>
+          <div class="analyze-opts" id="analyze-plat-opts">
+            <button class="analyze-plat-btn active" data-aplat="tiktok" onclick="setAnalyzePlatform('tiktok')">&#127381; TikTok</button>
+            <button class="analyze-plat-btn" data-aplat="reels" onclick="setAnalyzePlatform('reels')">&#128247; Reels</button>
+            <button class="analyze-plat-btn" data-aplat="shorts" onclick="setAnalyzePlatform('shorts')">&#9654; Shorts</button>
+            <button class="analyze-plat-btn" data-aplat="youtube" onclick="setAnalyzePlatform('youtube')">&#127910; YouTube</button>
+          </div>
+          <select id="analyze-platform" style="display:none"><option value="tiktok">tiktok</option><option value="reels">reels</option><option value="shorts">shorts</option><option value="youtube">youtube</option></select>
+        </div>
+        <div class="field">
+          <label>Paste your script here</label>
+          <textarea id="analyze-input" rows="10" placeholder="Paste the full script you want to analyze — hook, body, CTA, all of it. The more you paste, the more detailed the analysis."></textarea>
+        </div>
+        <button class="analyze-btn" onclick="runAnalysis()">&#128270; Analyze Script</button>
+        <div id="analysis-results"></div>
+        <div class="grammarly-note" style="margin-top:16px">
+          <strong>How it works:</strong> Scriptly scores your hook against 5 viral criteria (curiosity triggers, word count, numbers, controversy, relatability), predicts retention based on structure, and rates your CTA against platform-specific benchmarks. <strong>Pro unlocks all scores + specific line-by-line rewrites.</strong>
+        </div>
+      </div>
     </div>
 
     <div class="tab-pane" id="tab-saved">
@@ -238,16 +341,18 @@ button{font-family:inherit;cursor:pointer}
 <div class="overlay" id="upgrade-overlay">
   <div class="upgrade-modal">
     <h2>Unlock <span>Scriptly Pro</span></h2>
-    <p id="upgrade-msg">Purpose-built for TikTok creators. Better than ChatGPT for scripts — at 70% of the price.</p>
+    <p id="upgrade-msg">Full scripts, deeper analysis, and unlimited generation — better than ChatGPT at 30% of the price.</p>
     <ul class="upgrade-features">
-      <li>Unlimited script generation every day</li>
+      <li>Unlimited script generation every day (free = 1/day)</li>
+      <li>Full word-for-word scripts for 90s, 3min, 5min &amp; 10min videos</li>
+      <li>Complete Script Analyser — all scores + specific improvement suggestions</li>
       <li>Save scripts to your personal library</li>
-      <li>All 8 viral hook formulas</li>
-      <li>Viral Score on every script</li>
-      <li>Platform hashtags for TikTok, Reels & Shorts</li>
+      <li>YouTube SEO titles, descriptions &amp; thumbnail concepts</li>
+      <li>Pro generates 3 script variations per run (not just 1)</li>
+      <li>Platform-optimised for TikTok, Reels, Shorts &amp; YouTube</li>
     </ul>
     <div class="upgrade-price">$6<span>/month</span></div>
-    <div class="upgrade-note">70% cheaper than ChatGPT Plus. Cancel any time.</div>
+    <div class="upgrade-note">70% cheaper than ChatGPT Plus ($20/mo). Cancel any time.</div>
     <button class="upgrade-cta" onclick="goCheckout()">&#9889; Start Pro — $6/mo</button>
     <br>
     <button class="upgrade-dismiss" onclick="closeUpgrade()">Maybe later</button>
@@ -255,19 +360,19 @@ button{font-family:inherit;cursor:pointer}
 </div>
 
 <script>
-// Hook style selector (syncs hidden select)
-function setHook(style) {
-  document.querySelectorAll('.hook-opt').forEach(function(b){ b.classList.remove('active'); });
-  document.querySelector('[data-hook="' + style + '"]').classList.add('active');
-  document.getElementById('sel-hook').value = style;
-}
-// Populate the hidden select
-(function(){
-  var sel = document.getElementById('sel-hook');
-  var styles = ['random','curiosity','hottake','story','tutorial','stats','warning','pov','list'];
-  sel.innerHTML = styles.map(function(s){ return '<option value="'+s+'">'+s+'</option>'; }).join('');
-  sel.value = 'random';
-})();
+window.setDuration = function(d) {
+  document.querySelectorAll('.dur-btn').forEach(function(b){ b.classList.remove('active'); });
+  var btn = document.querySelector('[data-dur="' + d + '"]');
+  if (btn) btn.classList.add('active');
+  document.getElementById('sel-duration').value = d;
+};
+
+window.setAnalyzePlatform = function(p) {
+  document.querySelectorAll('.analyze-plat-btn').forEach(function(b){ b.classList.remove('active'); });
+  var btn = document.querySelector('[data-aplat="' + p + '"]');
+  if (btn) btn.classList.add('active');
+  document.getElementById('analyze-platform').value = p;
+};
 </script>
 <script src="app.js"></script>
 </body>
