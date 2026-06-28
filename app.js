@@ -17,13 +17,18 @@
 
   // ── Duration config ───────────────────────────────────────────────────────────
   var DURATIONS = {
-    '15s':  { label: '15 sec',  words: 38,   platforms: ['tiktok','reels','shorts'],          pro: false, sections: ['hook','cta'] },
-    '30s':  { label: '30 sec',  words: 75,   platforms: ['tiktok','reels','shorts'],          pro: false, sections: ['hook','setup','cta'] },
-    '60s':  { label: '60 sec',  words: 150,  platforms: ['tiktok','reels','shorts','youtube'],pro: false, sections: ['hook','setup','body1','body2','cta'] },
-    '90s':  { label: '90 sec',  words: 225,  platforms: ['tiktok','reels','shorts','youtube'],pro: true,  sections: ['hook','setup','body1','body2','body3','cta'] },
-    '3min': { label: '3 min',   words: 450,  platforms: ['reels','shorts','youtube'],         pro: true,  sections: ['hook','intro','body1','midcta','body2','body3','cta'] },
-    '5min': { label: '5 min',   words: 750,  platforms: ['youtube'],                          pro: true,  sections: ['hook','intro','body1','midcta1','body2','midcta2','body3','body4','cta','description'] },
-    '10min':{ label: '10 min',  words: 1500, platforms: ['youtube'],                          pro: true,  sections: ['hook','intro','body1','midcta1','body2','midcta2','body3','midcta3','body4','body5','cta','description'] },
+    '10s':  { label: '10 sec',  words: 25,   platforms: ['tiktok','reels','shorts'],                    pro: false, sections: ['hook','cta'] },
+    '30s':  { label: '30 sec',  words: 75,   platforms: ['tiktok','reels','shorts'],                    pro: false, sections: ['hook','setup','cta'] },
+    '60s':  { label: '60 sec',  words: 150,  platforms: ['tiktok','reels','shorts','youtube'],           pro: false, sections: ['hook','setup','body1','body2','cta'] },
+    '90s':  { label: '90 sec',  words: 225,  platforms: ['tiktok','reels','shorts','youtube'],           pro: false, sections: ['hook','setup','body1','body2','body3','cta'] },
+    '2min': { label: '2 min',   words: 300,  platforms: ['tiktok','reels','shorts','youtube'],           pro: false, sections: ['hook','intro','body1','body2','body3','cta'] },
+    '3min': { label: '3 min',   words: 450,  platforms: ['reels','shorts','youtube'],                   pro: true,  sections: ['hook','intro','body1','midcta','body2','body3','cta'] },
+    '5min': { label: '5 min',   words: 750,  platforms: ['youtube'],                                    pro: true,  sections: ['hook','intro','body1','midcta1','body2','midcta2','body3','body4','cta','description'] },
+    '8min': { label: '8 min',   words: 1200, platforms: ['youtube'],                                    pro: true,  sections: ['hook','intro','body1','midcta1','body2','midcta2','body3','midcta3','body4','body5','cta','description'] },
+    '10min':{ label: '10 min',  words: 1500, platforms: ['youtube'],                                    pro: true,  sections: ['hook','intro','body1','midcta1','body2','midcta2','body3','midcta3','body4','body5','cta','description'] },
+    '15min':{ label: '15 min',  words: 2250, platforms: ['youtube'],                                    pro: true,  sections: ['hook','intro','body1','midcta1','body2','midcta2','body3','midcta3','body4','body5','cta','description'] },
+    '20min':{ label: '20 min',  words: 3000, platforms: ['youtube'],                                    pro: true,  sections: ['hook','intro','body1','midcta1','body2','midcta2','body3','midcta3','body4','body5','cta','description'] },
+    '30min':{ label: '30 min',  words: 4500, platforms: ['youtube'],                                    pro: true,  sections: ['hook','intro','body1','midcta1','body2','midcta2','body3','midcta3','body4','body5','cta','description'] },
   };
 
   // ── Platform hashtags ─────────────────────────────────────────────────────────
@@ -298,8 +303,10 @@
     var plat   = PLATFORMS[platform];
     var year   = new Date().getFullYear();
     var vars   = { niche:niche, topic:topic, audience:audience, year:year };
-    var isLong = duration === '5min' || duration === '10min';
-    var isMed  = duration === '90s' || duration === '3min';
+    var LONG_DURS = ['5min','8min','10min','15min','20min','30min'];
+    var MED_DURS  = ['90s','2min','3min'];
+    var isLong = LONG_DURS.indexOf(duration) !== -1;
+    var isMed  = MED_DURS.indexOf(duration) !== -1;
 
     // Hook line
     var hookLine = fill(pick(HOOKS_TEXT[style] || HOOKS_TEXT.curiosity), vars);
@@ -311,7 +318,8 @@
     // Body
     var bodyText = '';
     if (isLong) {
-      var numChapters = duration === '10min' ? 5 : 4;
+      var CHAPTER_COUNTS = {'5min':4,'8min':6,'10min':5,'15min':8,'20min':10,'30min':14};
+      var numChapters = CHAPTER_COUNTS[duration] || 5;
       var intro = fill(BODY_LONG.intro_block, vars);
       bodyText += intro + '\n\n';
       for (var i = 1; i <= numChapters; i++) {
@@ -367,13 +375,18 @@
 
   function buildTimings(duration, sections) {
     var map = {
-      '15s':  { hook:'0:00 – 0:03', cta:'0:03 – 0:15' },
+      '10s':  { hook:'0:00 – 0:03', cta:'0:03 – 0:10' },
       '30s':  { hook:'0:00 – 0:03', setup:'0:03 – 0:08', cta:'0:08 – 0:30' },
       '60s':  { hook:'0:00 – 0:03', setup:'0:03 – 0:10', body1:'0:10 – 0:30', body2:'0:30 – 0:50', cta:'0:50 – 1:00' },
       '90s':  { hook:'0:00 – 0:03', setup:'0:03 – 0:10', body1:'0:10 – 0:35', body2:'0:35 – 1:00', body3:'1:00 – 1:20', cta:'1:20 – 1:30' },
+      '2min': { hook:'0:00 – 0:05', intro:'0:05 – 0:20', body1:'0:20 – 0:50', body2:'0:50 – 1:20', body3:'1:20 – 1:50', cta:'1:50 – 2:00' },
       '3min': { hook:'0:00 – 0:10', intro:'0:10 – 0:30', body1:'0:30 – 1:10', midcta:'1:10 – 1:20', body2:'1:20 – 2:00', body3:'2:00 – 2:45', cta:'2:45 – 3:00' },
       '5min': { hook:'0:00 – 0:30', intro:'0:30 – 1:00', body1:'1:00 – 2:00', midcta1:'2:00 – 2:10', body2:'2:10 – 3:10', midcta2:'3:10 – 3:20', body3:'3:20 – 4:10', body4:'4:10 – 4:45', cta:'4:45 – 5:00', description:'' },
+      '8min': { hook:'0:00 – 0:30', intro:'0:30 – 1:00', body1:'1:00 – 1:50', midcta1:'1:50 – 2:00', body2:'2:00 – 3:00', midcta2:'3:00 – 3:10', body3:'3:10 – 4:10', midcta3:'4:10 – 4:20', body4:'4:20 – 5:30', body5:'5:30 – 7:40', cta:'7:40 – 8:00', description:'' },
       '10min':{ hook:'0:00 – 0:30', intro:'0:30 – 1:00', body1:'1:00 – 2:00', midcta1:'2:00 – 2:10', body2:'2:10 – 3:30', midcta2:'3:30 – 3:40', body3:'3:40 – 5:00', midcta3:'5:00 – 5:10', body4:'5:10 – 7:00', body5:'7:00 – 9:30', cta:'9:30 – 10:00', description:'' },
+      '15min':{ hook:'0:00 – 0:30', intro:'0:30 – 1:30', body1:'1:30 – 3:00', midcta1:'3:00 – 3:10', body2:'3:10 – 5:00', midcta2:'5:00 – 5:10', body3:'5:10 – 7:00', midcta3:'7:00 – 7:10', body4:'7:10 – 9:30', body5:'9:30 – 14:30', cta:'14:30 – 15:00', description:'' },
+      '20min':{ hook:'0:00 – 0:30', intro:'0:30 – 2:00', body1:'2:00 – 4:30', midcta1:'4:30 – 4:40', body2:'4:40 – 7:30', midcta2:'7:30 – 7:40', body3:'7:40 – 11:00', midcta3:'11:00 – 11:10', body4:'11:10 – 15:00', body5:'15:00 – 19:30', cta:'19:30 – 20:00', description:'' },
+      '30min':{ hook:'0:00 – 0:45', intro:'0:45 – 2:30', body1:'2:30 – 6:00', midcta1:'6:00 – 6:15', body2:'6:15 – 11:00', midcta2:'11:00 – 11:15', body3:'11:15 – 16:30', midcta3:'16:30 – 16:45', body4:'16:45 – 22:30', body5:'22:30 – 29:15', cta:'29:15 – 30:00', description:'' },
     };
     return map[duration] || map['60s'];
   }
@@ -462,6 +475,14 @@
     var duration = document.getElementById('sel-duration').value;
 
     if (!niche || !topic) { showToast('Enter your niche and topic first', 'warn'); return; }
+
+    // Auto-switch platform to youtube for long-form durations
+    var durCfg = DURATIONS[duration];
+    if (durCfg && durCfg.platforms.indexOf(platform) === -1) {
+      platform = 'youtube';
+      window.setPlatform('youtube');
+      showToast('Switched to YouTube — long-form scripts are YouTube optimised', 'warn');
+    }
 
     // Pro gate for long durations
     if (DURATIONS[duration] && DURATIONS[duration].pro && !state.isPro) {
@@ -792,18 +813,7 @@
     if (btn) btn.classList.add('active');
     document.getElementById('sel-platform').value = p;
     state.platform = p;
-    updateDurationOptions(p);
   };
-
-  function updateDurationOptions(platform) {
-    var sel = document.getElementById('sel-duration');
-    if (!sel) return;
-    var current = sel.value;
-    sel.innerHTML = Object.keys(DURATIONS).filter(function(d){ return DURATIONS[d].platforms.indexOf(platform) !== -1; }).map(function(d){
-      var dur = DURATIONS[d];
-      return '<option value="' + d + '"' + (d === current || d === '60s' ? ' selected' : '') + '>' + dur.label + (dur.pro ? ' ⭐ Pro' : '') + '</option>';
-    }).join('');
-  }
 
   window.setHook = function(style) {
     document.querySelectorAll('.hook-opt').forEach(function(b){ b.classList.remove('active'); });
@@ -824,8 +834,6 @@
     if (badge) badge.style.display = state.isPro ? 'inline-flex' : 'none';
     var upgradeBtn = document.getElementById('nav-upgrade');
     if (upgradeBtn) upgradeBtn.style.display = state.isPro ? 'none' : 'inline-flex';
-
-    updateDurationOptions('tiktok');
 
     ['inp-niche','inp-topic','inp-audience'].forEach(function(id) {
       var el = document.getElementById(id);

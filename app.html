@@ -58,14 +58,30 @@ button{font-family:inherit;cursor:pointer}
 .field select option{background:var(--surface2)}
 .field textarea{resize:vertical;line-height:1.5}
 
-/* Duration grid */
-.dur-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:4px}
-.dur-btn{padding:7px 4px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--muted2);font-size:11px;font-weight:700;cursor:pointer;text-align:center;transition:all .15s;line-height:1.2}
-.dur-btn:hover{border-color:var(--accent);color:var(--accent)}
-.dur-btn.active{border-color:var(--accent);background:rgba(14,165,233,.1);color:var(--accent)}
-.dur-btn.pro-dur{position:relative}
-.dur-btn.pro-dur::after{content:'⭐';font-size:9px;display:block;color:var(--yellow)}
-.dur-btn.locked-dur{opacity:.45;cursor:default}
+/* Duration slider */
+.dur-display{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;margin-top:4px}
+.dur-val{font-size:22px;font-weight:900;color:var(--text);letter-spacing:-0.5px}
+.dur-val-sub{font-size:11px;color:var(--muted);margin-top:1px}
+.dur-tag{font-size:11px;font-weight:800;padding:3px 10px;border-radius:100px;letter-spacing:.04em}
+.dur-tag.free{background:rgba(16,185,129,.15);color:var(--green);border:1px solid rgba(16,185,129,.3)}
+.dur-tag.pro{background:rgba(245,158,11,.15);color:var(--yellow);border:1px solid rgba(245,158,11,.3)}
+.dur-zone-labels{display:flex;justify-content:space-between;font-size:10px;font-weight:700;margin-bottom:5px}
+.dur-zone-free{color:var(--green)}
+.dur-zone-pro{color:var(--yellow)}
+.dur-slider-wrap{position:relative;margin-bottom:6px}
+.dur-track{height:6px;border-radius:3px;background:var(--border);position:relative;overflow:hidden;margin:0 0 4px}
+.dur-track-free{position:absolute;left:0;height:100%;background:linear-gradient(90deg,var(--green),#06b6d4);border-radius:3px 0 0 3px}
+.dur-track-pro{position:absolute;height:100%;background:linear-gradient(90deg,#f59e0b,#f97316);border-radius:0 3px 3px 0}
+.dur-divider{position:absolute;top:-3px;width:2px;height:calc(100% + 6px);background:#fff;opacity:.35;border-radius:1px}
+input[type=range].dur-slider{width:100%;height:20px;-webkit-appearance:none;appearance:none;background:transparent;cursor:pointer;margin:0;padding:0}
+input[type=range].dur-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;background:var(--text);border:3px solid var(--bg);box-shadow:0 0 0 2px var(--accent);cursor:pointer;transition:box-shadow .15s}
+input[type=range].dur-slider::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--text);border:3px solid var(--bg);box-shadow:0 0 0 2px var(--accent);cursor:pointer}
+input[type=range].dur-slider::-webkit-slider-runnable-track{height:0}
+input[type=range].dur-slider::-moz-range-track{height:0;background:transparent}
+.dur-ticks{display:flex;justify-content:space-between;margin-top:2px}
+.dur-tick{font-size:9px;color:var(--muted);text-align:center;flex:1;white-space:nowrap}
+.dur-tick.key{color:var(--muted2);font-weight:700}
+.dur-note{font-size:10px;color:var(--muted);margin-top:6px;text-align:center}
 
 /* Hook style grid */
 .hook-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:4px}
@@ -235,16 +251,40 @@ button{font-family:inherit;cursor:pointer}
 
     <div>
       <div class="section-label">Video Length</div>
-      <div class="dur-grid" id="dur-grid">
-        <button class="dur-btn" data-dur="15s" onclick="setDuration('15s')">15 sec</button>
-        <button class="dur-btn" data-dur="30s" onclick="setDuration('30s')">30 sec</button>
-        <button class="dur-btn active" data-dur="60s" onclick="setDuration('60s')">60 sec</button>
-        <button class="dur-btn pro-dur" data-dur="90s" onclick="setDuration('90s')">90 sec</button>
-        <button class="dur-btn pro-dur" data-dur="3min" onclick="setDuration('3min')">3 min</button>
-        <button class="dur-btn pro-dur" data-dur="5min" onclick="setDuration('5min')">5 min</button>
-        <button class="dur-btn pro-dur locked-dur" data-dur="10min" onclick="setDuration('10min')" style="grid-column:span 3">10 min (YouTube)</button>
+      <div class="dur-display">
+        <div>
+          <div class="dur-val" id="dur-val">60 sec</div>
+          <div class="dur-val-sub" id="dur-val-sub">Short Form</div>
+        </div>
+        <span class="dur-tag free" id="dur-tag">FREE</span>
       </div>
-      <div style="font-size:10px;color:var(--muted);margin-top:6px">⭐ = Pro only &nbsp;·&nbsp; Full scripts for every length</div>
+      <div class="dur-zone-labels">
+        <span class="dur-zone-free">🟢 Short Form — Free</span>
+        <span class="dur-zone-pro">⭐ Long Form — Pro</span>
+      </div>
+      <div class="dur-slider-wrap">
+        <div class="dur-track" id="dur-track">
+          <div class="dur-track-free" id="dur-track-free"></div>
+          <div class="dur-track-pro" id="dur-track-pro"></div>
+          <div class="dur-divider" id="dur-divider"></div>
+        </div>
+        <input type="range" class="dur-slider" id="dur-slider" min="0" max="11" value="2">
+      </div>
+      <div class="dur-ticks">
+        <span class="dur-tick key">10s</span>
+        <span class="dur-tick">30s</span>
+        <span class="dur-tick key">1min</span>
+        <span class="dur-tick">90s</span>
+        <span class="dur-tick key">2min</span>
+        <span class="dur-tick">3min</span>
+        <span class="dur-tick key">5min</span>
+        <span class="dur-tick">8min</span>
+        <span class="dur-tick key">10min</span>
+        <span class="dur-tick">15min</span>
+        <span class="dur-tick">20min</span>
+        <span class="dur-tick key">30min</span>
+      </div>
+      <div class="dur-note" id="dur-note">Full word-for-word script · Every length</div>
     </div>
 
     <div>
@@ -283,7 +323,7 @@ button{font-family:inherit;cursor:pointer}
     <!-- Hidden selects used by app.js -->
     <select id="sel-hook"><option value="random">random</option><option value="curiosity">curiosity</option><option value="hottake">hottake</option><option value="story">story</option><option value="tutorial">tutorial</option><option value="stats">stats</option><option value="warning">warning</option><option value="pov">pov</option><option value="list">list</option></select>
     <select id="sel-platform"><option value="tiktok">tiktok</option><option value="reels">reels</option><option value="shorts">shorts</option><option value="youtube">youtube</option></select>
-    <select id="sel-duration"><option value="15s">15s</option><option value="30s">30s</option><option value="60s" selected>60s</option><option value="90s">90s</option><option value="3min">3min</option><option value="5min">5min</option><option value="10min">10min</option></select>
+    <select id="sel-duration"><option value="10s">10s</option><option value="30s">30s</option><option value="60s" selected>60s</option><option value="90s">90s</option><option value="2min">2min</option><option value="3min">3min</option><option value="5min">5min</option><option value="8min">8min</option><option value="10min">10min</option><option value="15min">15min</option><option value="20min">20min</option><option value="30min">30min</option></select>
 
     <div class="generate-wrap">
       <button class="generate-btn" onclick="generateScripts()">&#9889; Generate Full Script</button>
@@ -360,12 +400,89 @@ button{font-family:inherit;cursor:pointer}
 </div>
 
 <script>
-window.setDuration = function(d) {
-  document.querySelectorAll('.dur-btn').forEach(function(b){ b.classList.remove('active'); });
-  var btn = document.querySelector('[data-dur="' + d + '"]');
-  if (btn) btn.classList.add('active');
-  document.getElementById('sel-duration').value = d;
-};
+(function(){
+  var STEPS = [
+    {key:'10s',  label:'10 sec', sub:'Short Form', pro:false},
+    {key:'30s',  label:'30 sec', sub:'Short Form', pro:false},
+    {key:'60s',  label:'60 sec', sub:'Short Form', pro:false},
+    {key:'90s',  label:'90 sec', sub:'Short Form', pro:false},
+    {key:'2min', label:'2 min',  sub:'Short Form', pro:false},
+    {key:'3min', label:'3 min',  sub:'Long Form',  pro:true},
+    {key:'5min', label:'5 min',  sub:'Long Form',  pro:true},
+    {key:'8min', label:'8 min',  sub:'Long Form',  pro:true},
+    {key:'10min',label:'10 min', sub:'Long Form',  pro:true},
+    {key:'15min',label:'15 min', sub:'Long Form',  pro:true},
+    {key:'20min',label:'20 min', sub:'Long Form',  pro:true},
+    {key:'30min',label:'30 min', sub:'Long Form',  pro:true},
+  ];
+  // Free steps: 0-4 (5 steps), Pro steps: 5-11 (7 steps)
+  // Divider sits between index 4 and 5 → at position 4.5/11
+  var FREE_END = 4; // last free index
+  var MAX = STEPS.length - 1;
+  var DIVIDER_PCT = ((FREE_END + 0.5) / MAX) * 100; // ~40.9%
+
+  function updateSlider(idx) {
+    var step = STEPS[idx];
+    document.getElementById('dur-val').textContent    = step.label;
+    document.getElementById('dur-val-sub').textContent = step.sub;
+    document.getElementById('sel-duration').value     = step.key;
+
+    var tag = document.getElementById('dur-tag');
+    if (step.pro) {
+      tag.textContent = '⭐ PRO';
+      tag.className   = 'dur-tag pro';
+    } else {
+      tag.textContent = 'FREE';
+      tag.className   = 'dur-tag free';
+    }
+
+    // Fill the track up to the thumb position
+    var pct = (idx / MAX) * 100;
+    var freeWidth  = Math.min(pct, DIVIDER_PCT);
+    var proStart   = DIVIDER_PCT;
+    var proWidth   = Math.max(0, pct - DIVIDER_PCT);
+
+    document.getElementById('dur-track-free').style.width = freeWidth + '%';
+    document.getElementById('dur-track-pro').style.cssText =
+      'left:' + proStart + '%;width:' + proWidth + '%;position:absolute;height:100%;background:linear-gradient(90deg,#f59e0b,#f97316);border-radius:0 3px 3px 0';
+    document.getElementById('dur-divider').style.left = DIVIDER_PCT + '%';
+
+    // Thumb accent color
+    var slider = document.getElementById('dur-slider');
+    slider.style.setProperty('--thumb-color', step.pro ? '#f59e0b' : '#0ea5e9');
+
+    // Note
+    var note = document.getElementById('dur-note');
+    if (step.pro) {
+      note.innerHTML = '⭐ Long-form Pro script · YouTube optimised · <a href="#" onclick="event.preventDefault();triggerUpgrade()" style="color:var(--yellow)">Upgrade to unlock</a>';
+    } else {
+      note.textContent = 'Full word-for-word script · Free';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var slider = document.getElementById('dur-slider');
+    if (!slider) return;
+
+    // Style thumb dynamically
+    var style = document.createElement('style');
+    style.textContent = 'input[type=range].dur-slider::-webkit-slider-thumb{box-shadow:0 0 0 2px var(--thumb-color,#0ea5e9)!important}';
+    document.head.appendChild(style);
+
+    updateSlider(2); // default: 60s (index 2)
+
+    slider.addEventListener('input', function() {
+      updateSlider(parseInt(this.value));
+    });
+  });
+
+  window.setDuration = function(d) {
+    var idx = STEPS.findIndex ? STEPS.findIndex(function(s){ return s.key === d; }) : (function(){ for(var i=0;i<STEPS.length;i++){ if(STEPS[i].key===d) return i; } return 2; })();
+    var slider = document.getElementById('dur-slider');
+    if (slider) slider.value = idx;
+    updateSlider(idx);
+  };
+})();
 
 window.setAnalyzePlatform = function(p) {
   document.querySelectorAll('.analyze-plat-btn').forEach(function(b){ b.classList.remove('active'); });
